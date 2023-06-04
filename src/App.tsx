@@ -1,7 +1,7 @@
 import React from "react";
 
 function App() {
-  return <div>App</div>;
+  return <div>Address Vault</div>;
 }
 
 export default App;
