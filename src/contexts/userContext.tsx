@@ -14,7 +14,7 @@ type Props = {
 
 // main:
 export const UserContextProvider = ({ children }: Props) => {
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(true);
 
   const value: UserContext = {
     isAuthorized,
