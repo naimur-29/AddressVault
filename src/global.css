@@ -22,3 +22,18 @@ code {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 }
+
+:root {
+  --primary-blue: #1e0478;
+  --primary-blue-dark: #0a0129;
+  --primary-blue-light: #6f7ccd;
+  --primary-violet: #9b8ccc;
+  --primary-violet-op33: #9b8ccc33;
+  --primary-violet-op55: #9b8ccc55;
+  --primary-violet-op77: #9b8ccc77;
+  --primary-violet-light: #a998df;
+  --primary-sky-blue: #94e7ef;
+
+  --primary-text-slate: #f8fafc;
+  --secondary-text-slate: #e2e8f0;
+}

@@ -10,28 +10,13 @@ import {
   ArrowLeftFromLine,
   Plus,
   Settings,
-  LightbulbOff,
 } from "lucide-react";
 
-const list = {
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      staggerChildren: 0.2,
-      ease: "linear",
-    },
-  },
-  hidden: {
-    opacity: 0,
-    y: 10,
-  },
-  exit: {
-    opacity: 0,
-    y: -10,
-    transition: { staggerChildren: -0.1, ease: "linear" },
-  },
-};
+// import images:
+import AddressVaultLogo from "../assets/imgs/address-vault.png";
+
+// import animation variations:
+import { FadeInOutList } from "../animations/sidebar";
 
 // main:
 const Sidebar = () => {
@@ -44,19 +29,26 @@ const Sidebar = () => {
     <section
       className={`_sidebar w-screen sm:w-[270px] h-screen fixed top-0 ${
         isSidebarActive ? "left-0" : "left-[-100%]"
-      } bg-black z-40 px-4 duration-200 select-none border-r-2 border-[#fff3]`}
+      } bg-[--primary-blue-dark] z-40 px-4 duration-200 select-none border-r-2 border-[--primary-violet-op77]`}
     >
       <div className="flex flex-col justify-between h-full py-4 _container">
         <div className="flex flex-col gap-4 _top">
           {/* Logo Section */}
-          <div className="flex items-center justify-between mb-2 _logo bg-[#fff3] rounded-md px-1">
-            <button className="text-white">
-              <LightbulbOff />
+          <div className="flex items-center justify-between mb-2 _logo bg-[--primary-violet-op33] rounded-md px-2 py-2">
+            <button className="flex items-center w-full gap-2">
+              <img
+                src={AddressVaultLogo}
+                alt="address vault logo"
+                className="object-contain w-9"
+              />
+              <span className="text-lg font-semibold text-[--primary-text-slate]">
+                Address Vault
+              </span>
             </button>
 
             <button
               onClick={() => setIsSidebarActive(false)}
-              className="p-2 text-white sm:invisible"
+              className="flex items-center justify-center text-[--primary-text-slate] sm:invisible"
             >
               <ArrowLeftFromLine />
             </button>
@@ -70,29 +62,31 @@ const Sidebar = () => {
               onChange={(e) => setSearchText(e.target.value)}
               value={searchText}
               type="text"
-              className={`w-full px-2 py-5 duration-100 rounded-md outline-[#fff3] h-9 focus:bg-[#fff3] text-white ${
-                isSearchBarActive ? "bg-[#fff3]" : "bg-transparent"
+              className={`w-full px-2 py-5 duration-100 rounded-md outline-[--primary-violet-op33] h-9 focus:bg-[--primary-violet-op33] text-[--primary-text-slate] ${
+                isSearchBarActive
+                  ? "bg-[--primary-violet-op33]"
+                  : "bg-transparent"
               }`}
             />
             <span
-              className={`absolute top-0 left-0 flex items-center w-full gap-1 px-2 py-5 bg-[#fff2] text-[#fff7] border-[#fff2] border-2 duration-200 rounded-md h-9 -z-10 text-lg ${
+              className={`absolute top-0 left-0 flex items-center w-full gap-1 px-2 py-5 bg-[--primary-violet-op33] text-[--primary-violet-op77] border-[--primary-violet-op33] border-2 duration-200 rounded-md h-9 -z-10 text-lg ${
                 isSearchBarActive ? "-translate-y-3 opacity-0" : ""
               }`}
             >
               Search
             </span>
 
-            <button className="absolute top-0 right-0 h-full px-2 text-white hover:scale-110">
+            <button className="absolute top-0 right-0 h-full px-2 text-[--primary-violet-light] hover:scale-110 active:scale-90">
               <Search />
             </button>
           </div>
 
           {/* Nav Section */}
-          <div className="flex flex-col gap-1 text-white cursor-pointer _nav">
+          <div className="flex flex-col gap-1 text-[--secondary-text-slate] cursor-pointer _nav">
             <button className="relative flex gap-1 px-1 py-2 rounded-md _item">
               <Bookmark />
               Navigation Item
-              <div className="_active-overlay absolute bg-[#fff3] top-0 left-0 w-full h-full rounded-md -z-10 duration-200 translate-y-[calc(0*(100%+0.25rem))]"></div>
+              <div className="_active-overlay absolute bg-[--primary-violet-op55] top-0 left-0 w-full h-full rounded-md -z-10 duration-200 translate-y-[calc(0*(100%+0.25rem))]"></div>
             </button>
             <button className="relative flex gap-1 px-1 py-2 rounded-md _item">
               <Bookmark />
@@ -112,13 +106,11 @@ const Sidebar = () => {
             >
               <div className="flex justify-between w-full">
                 <div className="flex gap-1">
-                  <Bookmark absoluteStrokeWidth />
+                  <Bookmark />
                   Tags
                 </div>
 
-                <button className="duration-100 _btn">
-                  <ChevronRight absoluteStrokeWidth />
-                </button>
+                <ChevronRight className="duration-100 _btn" />
               </div>
 
               <AnimatePresence>
@@ -128,24 +120,24 @@ const Sidebar = () => {
                     animate="visible"
                     initial="hidden"
                     exit="exit"
-                    variants={list}
+                    variants={FadeInOutList}
                     className="flex flex-col w-full gap-1 px-2"
                   >
                     <motion.button
-                      variants={list}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-white"
+                      variants={FadeInOutList}
+                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
                     >
                       Navigation Item
                     </motion.button>
                     <motion.button
-                      variants={list}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-white"
+                      variants={FadeInOutList}
+                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
                     >
                       Navigation Item
                     </motion.button>
                     <motion.button
-                      variants={list}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-white"
+                      variants={FadeInOutList}
+                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
                     >
                       Navigation Item
                     </motion.button>
@@ -156,38 +148,40 @@ const Sidebar = () => {
           </div>
 
           {/* Stats Section */}
-          <div className="flex items-center justify-between p-2 bg-white rounded-md _stats">
+          <button className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats">
             <div className="flex flex-col gap-1">
               <p>Untagged</p>
-              <p>41</p>
+              <p className="text-left">41</p>
             </div>
 
-            <ChevronRight absoluteStrokeWidth />
-          </div>
+            <ChevronRight />
+          </button>
 
           {/* Add Contact Section */}
-          <button className="flex items-center justify-center w-full gap-1 p-2 bg-white rounded-md _add-contact">
+          <button className="flex items-center justify-center w-full gap-1 p-2 bg-[--primary-blue] text-lg font-semibold text-[--primary-text-slate] hover:bg-[--primary-blue-light] duration-300 active:scale-90 rounded-md _add-contact">
             Add Contact <Plus />
           </button>
         </div>
 
         <div className="_bottom">
           {/* User Section */}
-          <div className="_user bg-[#fff3] rounded-md flex justify-between p-2 items-center">
+          <div className="flex items-center justify-between py-1 rounded-md _user">
             {/* User Info/Profile */}
             <div className="flex items-center gap-2 _user-info">
-              <div className="w-10 p-[1.5px] overflow-hidden bg-white rounded-full aspect-square">
+              <div className="w-8 overflow-hidden bg-[primary-violet-op77] rounded-full aspect-square flex items-center">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/330px-Elon_Musk_Royal_Society_%28crop2%29.jpg"
+                  src="https://www.wallpaperflare.com/static/218/678/406/digital-art-anime-girls-fantasy-art-artwork-wallpaper.jpg"
                   alt="Profile"
-                  className="object-cover object-center w-full h-full rounded-full"
+                  className="object-cover object-center w-full h-full rounded-full bg-[primary-violet-op77]"
                 />
               </div>
-              <p className="text-white">User Name</p>
+              <p className="text-[--primary-text-slate] font-semibold font-mono translate-y-[2px]">
+                User Name
+              </p>
             </div>
 
             {/* Settings */}
-            <button className="text-white">
+            <button className="text-[--primary-violet-light] hover:rotate-90 hover:scale-110 duration-200 active:scale-90">
               <Settings />
             </button>
           </div>
