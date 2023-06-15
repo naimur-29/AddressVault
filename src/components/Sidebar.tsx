@@ -1,29 +1,20 @@
 // importing libraries:
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 // importing icons:
-import {
-  Search,
-  Bookmark,
-  ChevronRight,
-  ArrowLeftFromLine,
-  Plus,
-  Settings,
-} from "lucide-react";
+import { ChevronRight, ArrowLeftFromLine, Plus } from "lucide-react";
 
-// import images:
+// importing images:
 import AddressVaultLogo from "../assets/imgs/address-vault.png";
 
-// import animation variations:
-import { FadeInOutList } from "../animations/sidebar";
+// importing local components:
+import Navigation from "./Navigation";
+import Settings from "./Settings";
+import Search from "./Search";
 
 // main:
 const Sidebar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
-  const [isTagsActive, setIsTagsActive] = useState<boolean>(false);
-  const [isSearchBarActive, setIsSearchBarActive] = useState<boolean>(false);
-  const [searchText, setSearchText] = useState<string>("");
 
   return (
     <section
@@ -55,97 +46,10 @@ const Sidebar = () => {
           </div>
 
           {/* Search Section */}
-          <div className="relative _search">
-            <input
-              onFocus={() => setIsSearchBarActive(true)}
-              onBlur={() => !searchText && setIsSearchBarActive(false)}
-              onChange={(e) => setSearchText(e.target.value)}
-              value={searchText}
-              type="text"
-              className={`w-full px-2 py-5 duration-100 rounded-md outline-[--primary-violet-op33] h-9 focus:bg-[--primary-violet-op33] text-[--primary-text-slate] ${
-                isSearchBarActive
-                  ? "bg-[--primary-violet-op33]"
-                  : "bg-transparent"
-              }`}
-            />
-            <span
-              className={`absolute top-0 left-0 flex items-center w-full gap-1 px-2 py-5 bg-[--primary-violet-op33] text-[--primary-violet-op77] border-[--primary-violet-op33] border-2 duration-200 rounded-md h-9 -z-10 text-lg ${
-                isSearchBarActive ? "-translate-y-3 opacity-0" : ""
-              }`}
-            >
-              Search
-            </span>
-
-            <button className="absolute top-0 right-0 h-full px-2 text-[--primary-violet-light] hover:scale-110 active:scale-90">
-              <Search />
-            </button>
-          </div>
+          <Search />
 
           {/* Nav Section */}
-          <div className="flex flex-col gap-1 text-[--secondary-text-slate] cursor-pointer _nav">
-            <button className="relative flex gap-1 px-1 py-2 rounded-md _item">
-              <Bookmark />
-              Navigation Item
-              <div className="_active-overlay absolute bg-[--primary-violet-op55] top-0 left-0 w-full h-full rounded-md -z-10 duration-200 translate-y-[calc(0*(100%+0.25rem))]"></div>
-            </button>
-            <button className="relative flex gap-1 px-1 py-2 rounded-md _item">
-              <Bookmark />
-              Navigation Item
-            </button>
-            <button className="relative flex gap-1 px-1 py-2 rounded-md _item">
-              <Bookmark />
-              Navigation Item
-            </button>
-
-            <button
-              onClick={() => {
-                document.querySelector("._btn")?.classList.toggle("rotate-90");
-                setIsTagsActive(!isTagsActive);
-              }}
-              className="flex flex-col w-full gap-3 px-1 py-2 rounded-md _item"
-            >
-              <div className="flex justify-between w-full">
-                <div className="flex gap-1">
-                  <Bookmark />
-                  Tags
-                </div>
-
-                <ChevronRight className="duration-100 _btn" />
-              </div>
-
-              <AnimatePresence>
-                {isTagsActive && (
-                  <motion.div
-                    key="tags"
-                    animate="visible"
-                    initial="hidden"
-                    exit="exit"
-                    variants={FadeInOutList}
-                    className="flex flex-col w-full gap-1 px-2"
-                  >
-                    <motion.button
-                      variants={FadeInOutList}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
-                    >
-                      Navigation Item
-                    </motion.button>
-                    <motion.button
-                      variants={FadeInOutList}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
-                    >
-                      Navigation Item
-                    </motion.button>
-                    <motion.button
-                      variants={FadeInOutList}
-                      className="w-full p-1 text-left border border-transparent rounded-md hover:border-[--primary-violet-op77]"
-                    >
-                      Navigation Item
-                    </motion.button>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-          </div>
+          <Navigation />
 
           {/* Stats Section */}
           <button className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats">
@@ -165,26 +69,7 @@ const Sidebar = () => {
 
         <div className="_bottom">
           {/* User Section */}
-          <div className="flex items-center justify-between py-1 rounded-md _user">
-            {/* User Info/Profile */}
-            <div className="flex items-center gap-2 _user-info">
-              <div className="w-8 overflow-hidden bg-[primary-violet-op77] rounded-full aspect-square flex items-center">
-                <img
-                  src="https://www.wallpaperflare.com/static/218/678/406/digital-art-anime-girls-fantasy-art-artwork-wallpaper.jpg"
-                  alt="Profile"
-                  className="object-cover object-center w-full h-full rounded-full bg-[primary-violet-op77]"
-                />
-              </div>
-              <p className="text-[--primary-text-slate] font-semibold font-mono translate-y-[2px]">
-                User Name
-              </p>
-            </div>
-
-            {/* Settings */}
-            <button className="text-[--primary-violet-light] hover:rotate-90 hover:scale-110 duration-200 active:scale-90">
-              <Settings />
-            </button>
-          </div>
+          <Settings />
         </div>
       </div>
     </section>
