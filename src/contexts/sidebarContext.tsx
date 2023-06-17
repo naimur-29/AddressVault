@@ -12,11 +12,14 @@ const sidebarContext = createContext<SidebarContext | null>(null);
 export const SidebarContextProvider = ({ children }: Props) => {
   // states:
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   // context value:
-  const value = {
+  const value: SidebarContext = {
     isSidebarActive,
     setIsSidebarActive,
+    activeIndex,
+    setActiveIndex,
   };
 
   return (

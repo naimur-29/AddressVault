@@ -1,5 +1,4 @@
 // importing libraries:
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // components:
@@ -10,9 +9,6 @@ import { Tags, Mail, Users2, Star } from "lucide-react";
 
 // main:
 const Navigation = () => {
-  // states:
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-
   // hooks:
   const navigate = useNavigate();
 
@@ -24,9 +20,7 @@ const Navigation = () => {
         }}
         context={"All People"}
         isFirst
-        activeIndex={activeIndex}
         index={0}
-        setActiveIndex={setActiveIndex}
         icon={<Users2 />}
       />
 
@@ -36,7 +30,6 @@ const Navigation = () => {
         }}
         context={"Favorites"}
         index={1}
-        setActiveIndex={setActiveIndex}
         icon={<Star />}
       />
 
@@ -48,8 +41,6 @@ const Navigation = () => {
         context={"Tags"}
         subItems={["Family", "Friends", "Businesses", "Others"]}
         index={2}
-        setActiveIndex={setActiveIndex}
-        activeIndex={activeIndex}
         icon={<Tags />}
       />
 
@@ -59,7 +50,6 @@ const Navigation = () => {
         }}
         context={"Mail"}
         index={3}
-        setActiveIndex={setActiveIndex}
         icon={<Mail />}
       />
     </div>

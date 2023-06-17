@@ -19,21 +19,19 @@ export const NavItem = ({
   action,
   context,
   isFirst,
-  activeIndex,
   index,
-  setActiveIndex,
   icon,
 }: {
   action: (context: string) => void;
   context: string;
   isFirst?: boolean;
   index: number;
-  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
-  activeIndex?: number;
   icon: any;
 }) => {
   // contexts:
-  const { setIsSidebarActive } = useContext(sidebarContext) as SidebarContext;
+  const { setIsSidebarActive, activeIndex, setActiveIndex } = useContext(
+    sidebarContext
+  ) as SidebarContext;
 
   // handle functions:
   const handleOnClick = (): void => {
@@ -76,8 +74,6 @@ export const NavItemExpandable = ({
   context,
   subItems,
   index,
-  setActiveIndex,
-  activeIndex,
   icon,
 }: {
   action: (context: string) => void;
@@ -85,8 +81,6 @@ export const NavItemExpandable = ({
   context: string;
   subItems: string[];
   index: number;
-  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
-  activeIndex: number;
   icon: any;
 }) => {
   // states:
@@ -94,7 +88,9 @@ export const NavItemExpandable = ({
   const [activeSubIndex, setActiveSubIndex] = useState<number>(0);
 
   // contexts:
-  const { setIsSidebarActive } = useContext(sidebarContext) as SidebarContext;
+  const { setIsSidebarActive, activeIndex, setActiveIndex } = useContext(
+    sidebarContext
+  ) as SidebarContext;
 
   // useEffects:
   useEffect((): void => {

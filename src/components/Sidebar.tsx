@@ -1,6 +1,7 @@
 // importing libraries:
 import { useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 // contexts:
 import sidebarContext from "../contexts/sidebarContext";
@@ -26,9 +27,12 @@ import { SidebarContext } from "../@types/sidebar";
 // main:
 const Sidebar = () => {
   // contexts:
-  const { isSidebarActive, setIsSidebarActive } = useContext(
+  const { isSidebarActive, setIsSidebarActive, setActiveIndex } = useContext(
     sidebarContext
   ) as SidebarContext;
+
+  // hooks:
+  const navigate = useNavigate();
 
   return (
     <section
@@ -67,7 +71,11 @@ const Sidebar = () => {
 
           {/* Stats Section */}
           <button
-            onClick={() => setIsSidebarActive(false)}
+            onClick={() => {
+              setIsSidebarActive(false);
+              setActiveIndex(0);
+              navigate("/dashboard");
+            }}
             className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats"
           >
             <div className="flex flex-col gap-1">
