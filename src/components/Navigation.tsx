@@ -8,11 +8,6 @@ import { Bookmark, ChevronRight } from "lucide-react";
 // import animation variations:
 import { FadeInOutList } from "../animations/sidebar";
 
-// functions:
-const getOffset = (i: any): string => {
-  return `translate-y-[calc(${i * 100}%+${i * 0.25}rem)]`;
-};
-
 // main:
 const Navigation = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -64,9 +59,12 @@ const NavItem = ({
       {context}
       {isFirst && (
         <div
-          className={`_active-overlay absolute bg-[--primary-violet-op55] top-0 left-0 w-full h-full rounded-md -z-10 duration-200 ${getOffset(
-            activeIndex
-          )}`}
+          style={{
+            transform: `translateY(calc(${(activeIndex || 0) * 100}% + ${
+              (activeIndex || 0) * 0.25
+            }rem))`,
+          }}
+          className={`_active-overlay absolute bg-[--primary-violet-op55] top-0 left-0 w-full h-full rounded-md -z-10 duration-200`}
         ></div>
       )}
     </button>
@@ -132,9 +130,12 @@ const NavItemExpandable = ({
 
                 {key === 0 && (
                   <div
-                    className={`_active-overlay absolute border-x-[2px] border-[--primary-violet-op77] bg-[--primary-violet-op33] top-0 left-0 w-full h-full rounded-md -z-10 duration-200 ${getOffset(
-                      activeSubIndex
-                    )}`}
+                    style={{
+                      transform: `translateY(calc(${
+                        (activeSubIndex || 0) * 100
+                      }% + ${(activeSubIndex || 0) * 0.25}rem))`,
+                    }}
+                    className={`_active-overlay absolute border-x-[2px] border-[--primary-violet-op77] bg-[--primary-violet-op33] top-0 left-0 w-full h-full rounded-md -z-10 duration-200`}
                   ></div>
                 )}
               </motion.div>
