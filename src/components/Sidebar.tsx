@@ -11,6 +11,7 @@ import AddressVaultLogo from "../assets/imgs/address-vault.png";
 import Navigation from "./Navigation";
 import Settings from "./Settings";
 import Search from "./Search";
+import AddContact from "./AddContact";
 
 // main:
 const Sidebar = () => {
@@ -62,9 +63,7 @@ const Sidebar = () => {
           </button>
 
           {/* Add Contact Section */}
-          <button className="flex items-center justify-center w-full gap-1 p-2 bg-[--primary-blue] text-lg font-semibold text-[--primary-text-slate] hover:bg-[--primary-blue-light] duration-300 active:scale-90 rounded-md _add-contact">
-            Add Contact <Plus />
-          </button>
+          <AddContact />
         </div>
 
         <div className="_bottom">

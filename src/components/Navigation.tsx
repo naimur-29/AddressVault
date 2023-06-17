@@ -1,5 +1,5 @@
 // importing libraries:
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // importing icons:
@@ -32,6 +32,7 @@ const Navigation = () => {
         subItems={["Family", "Friends", "Businesses", "Others"]}
         index={2}
         setActiveIndex={setActiveIndex}
+        activeIndex={activeIndex}
       />
     </div>
   );
@@ -76,15 +77,24 @@ const NavItemExpandable = ({
   subItems,
   index,
   setActiveIndex,
+  activeIndex,
 }: {
   context: string;
   subItems: string[];
   index: number;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+  activeIndex: number;
 }) => {
   // states:
   const [isTagsActive, setIsTagsActive] = useState<boolean>(false);
   const [activeSubIndex, setActiveSubIndex] = useState<number>(0);
+
+  // useEffects:
+  useEffect((): void => {
+    if (activeIndex !== index) {
+      setIsTagsActive(false);
+    }
+  }, [activeIndex, index]);
 
   return (
     <button className="flex flex-col w-full gap-3 px-1 py-2 rounded-md _item">
