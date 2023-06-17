@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
 // animations:
-import { FadeInOutList } from "../animations/sidebar";
+import { FadeInIn } from "../animations/sidebar";
 
 const AddContact = () => {
   const [isAddContactModalActive, setIsAddContactModalActive] =
@@ -24,14 +24,14 @@ const AddContact = () => {
       <AnimatePresence>
         {isAddContactModalActive && (
           <motion.div
-            variants={FadeInOutList}
+            variants={FadeInIn}
             initial="hidden"
             animate="visible"
             exit="exit"
             className="_wrapper fixed top-0 right-0 w-full sm:w-[calc(100vw-270px)] h-full bg-[#000] flex items-center justify-center px-5 z-50"
           >
             <motion.div
-              variants={FadeInOutList}
+              variants={FadeInIn}
               className="_modal w-full md:w-[540px] min-h-[50%] bg-white rounded"
             >
               <button onClick={() => setIsAddContactModalActive(false)}>

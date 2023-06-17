@@ -1,14 +1,26 @@
 // libraries:
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+// contexts:
+import sidebarContext from "../contexts/sidebarContext";
 
 // importing icons:
 import { Search as SearchIcon } from "lucide-react";
+
+// types:
+import { SidebarContext } from "../@types/sidebar";
 
 // main:
 const Search = () => {
   // states:
   const [isSearchBarActive, setIsSearchBarActive] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
+
+  // contexts:
+  const { setIsSidebarActive } = useContext(sidebarContext) as SidebarContext;
+
+  // functions:
+  // const handleSearch = (): void => {};
 
   return (
     <div className="relative _search">
@@ -30,7 +42,10 @@ const Search = () => {
         Search
       </span>
 
-      <button className="absolute top-0 right-0 h-full px-2 text-[--primary-violet-light] hover:scale-110 active:scale-90">
+      <button
+        onClick={() => setIsSidebarActive(false)}
+        className="absolute top-0 right-0 h-full px-2 text-[--primary-violet-light] hover:scale-110 active:scale-90"
+      >
         <SearchIcon />
       </button>
     </div>

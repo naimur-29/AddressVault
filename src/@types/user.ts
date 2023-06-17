@@ -1,4 +1,4 @@
 export type UserContext = {
   isAuthorized: boolean;
-  setIsAuthorized: (state: boolean) => void;
+  setIsAuthorized: React.Dispatch<React.SetStateAction<boolean>>;
 };

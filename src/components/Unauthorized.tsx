@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "./Layout";
 
 // importing contexts:
-import { userContext } from "../contexts/userContext";
+import userContext from "../contexts/userContext";
 
 // importing types:
 import { Props } from "../@types/react";

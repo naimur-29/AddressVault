@@ -1,8 +1,15 @@
 // importing libraries:
-import { useState } from "react";
+import { useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+// contexts:
+import sidebarContext from "../contexts/sidebarContext";
 
 // importing icons:
-import { ChevronRight, ArrowLeftFromLine, Plus } from "lucide-react";
+import { ChevronRight, ArrowLeftFromLine } from "lucide-react";
+
+// import animation variations:
+import { PopInOut, FadeInOut } from "../animations/sidebar";
 
 // importing images:
 import AddressVaultLogo from "../assets/imgs/address-vault.png";
@@ -13,13 +20,19 @@ import Settings from "./Settings";
 import Search from "./Search";
 import AddContact from "./AddContact";
 
+// types:
+import { SidebarContext } from "../@types/sidebar";
+
 // main:
 const Sidebar = () => {
-  const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
+  // contexts:
+  const { isSidebarActive, setIsSidebarActive } = useContext(
+    sidebarContext
+  ) as SidebarContext;
 
   return (
     <section
-      className={`_sidebar w-screen sm:w-[270px] h-screen fixed top-0 ${
+      className={`_sidebar w-screen sm:w-[270px] h-screen fixed top-0 sm:left-0 ${
         isSidebarActive ? "left-0" : "left-[-100%]"
       } bg-[--primary-blue-dark] z-40 px-4 duration-200 select-none border-r-2 border-[--primary-violet-op77]`}
     >
@@ -53,7 +66,10 @@ const Sidebar = () => {
           <Navigation />
 
           {/* Stats Section */}
-          <button className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats">
+          <button
+            onClick={() => setIsSidebarActive(false)}
+            className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats"
+          >
             <div className="flex flex-col gap-1">
               <p>Untagged</p>
               <p className="text-left">41</p>
@@ -71,6 +87,33 @@ const Sidebar = () => {
           <Settings />
         </div>
       </div>
+
+      <AnimatePresence>
+        {/* mobile hamburger menu system */}
+        {!isSidebarActive && (
+          <motion.div
+            onClick={() => setIsSidebarActive(true)}
+            variants={PopInOut}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="_hamburger cursor-pointer fixed bottom-2 right-2 sm:invisible border-2 border-[--primary-violet] w-[70px] rounded p-1 flex flex-col items-center justify-between gap-1"
+          >
+            <motion.div
+              variants={FadeInOut}
+              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            ></motion.div>
+            <motion.div
+              variants={FadeInOut}
+              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            ></motion.div>
+            <motion.div
+              variants={FadeInOut}
+              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            ></motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

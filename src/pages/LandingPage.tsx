@@ -3,7 +3,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 // importing contexts:
-import { userContext } from "../contexts/userContext";
+import userContext from "../contexts/userContext";
 
 // importing types:
 import { UserContext } from "../@types/user";
