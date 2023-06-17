@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import sidebarContext from "../contexts/sidebarContext";
 
 // importing icons:
-import { Bookmark, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 // import animation variations:
 import { FadeInOut } from "../animations/sidebar";
@@ -16,33 +16,44 @@ import { SidebarContext } from "../@types/sidebar";
 
 // main:
 export const NavItem = ({
+  action,
   context,
   isFirst,
   activeIndex,
   index,
   setActiveIndex,
+  icon,
 }: {
+  action: (context: string) => void;
   context: string;
   isFirst?: boolean;
   index: number;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   activeIndex?: number;
+  icon: any;
 }) => {
   // contexts:
   const { setIsSidebarActive } = useContext(sidebarContext) as SidebarContext;
 
+  // handle functions:
+  const handleOnClick = (): void => {
+    setActiveIndex(index);
+
+    // onclick:
+    action(context);
+
+    // close sidebar on mobile:
+    setTimeout(() => {
+      setIsSidebarActive(false);
+    }, 500);
+  };
+
   return (
     <button
-      onClick={() => {
-        setActiveIndex(index);
-        // close sidebar on mobile:
-        setTimeout(() => {
-          setIsSidebarActive(false);
-        }, 500);
-      }}
+      onClick={handleOnClick}
       className="relative flex gap-1 px-1 py-2 rounded-md _item"
     >
-      <Bookmark />
+      {icon}
       {context}
       {isFirst && (
         <div
@@ -60,17 +71,23 @@ export const NavItem = ({
 
 // NavItemExpandable Component:
 export const NavItemExpandable = ({
+  action,
+  subAction,
   context,
   subItems,
   index,
   setActiveIndex,
   activeIndex,
+  icon,
 }: {
+  action: (context: string) => void;
+  subAction: (context: string) => void;
   context: string;
   subItems: string[];
   index: number;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   activeIndex: number;
+  icon: any;
 }) => {
   // states:
   const [isTagsActive, setIsTagsActive] = useState<boolean>(false);
@@ -83,22 +100,40 @@ export const NavItemExpandable = ({
   useEffect((): void => {
     if (activeIndex !== index) {
       setIsTagsActive(false);
+      document.querySelector("._btn")?.classList.remove("rotate-90");
     }
   }, [activeIndex, index]);
 
+  // handle functions:
+  const handleOnClick = (): void => {
+    // arrow button rotate on click:
+    document.querySelector("._btn")?.classList.toggle("rotate-90");
+
+    setIsTagsActive((prev) => !prev);
+    setActiveIndex(index);
+    setActiveSubIndex(0);
+
+    // onclick:
+    action(context);
+  };
+
+  const handleSubItemsOnClick = (key: number, item: string): void => {
+    setActiveSubIndex(key);
+
+    // onclick:
+    subAction(item);
+
+    // close sidebar on mobile:
+    setTimeout(() => {
+      setIsSidebarActive(false);
+    }, 500);
+  };
+
   return (
     <button className="flex flex-col w-full gap-3 px-1 py-2 rounded-md _item">
-      <div
-        onClick={() => {
-          document.querySelector("._btn")?.classList.toggle("rotate-90");
-          setIsTagsActive((prev) => !prev);
-          setActiveIndex(index);
-          setActiveSubIndex(0);
-        }}
-        className="flex justify-between w-full"
-      >
+      <div onClick={handleOnClick} className="flex justify-between w-full">
         <div className="flex gap-1">
-          <Bookmark />
+          {icon}
           {context}
         </div>
 
@@ -117,13 +152,7 @@ export const NavItemExpandable = ({
           >
             {subItems.map((item, key) => (
               <motion.div
-                onClick={() => {
-                  setActiveSubIndex(key);
-                  // close sidebar on mobile:
-                  setTimeout(() => {
-                    setIsSidebarActive(false);
-                  }, 500);
-                }}
+                onClick={() => handleSubItemsOnClick(key, item)}
                 key={key}
                 variants={FadeInOut}
                 className={`${

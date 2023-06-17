@@ -16,6 +16,7 @@ import Unauthorized from "./components/Unauthorized";
 // importing pages:
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
+import Mail from "./pages/Mail";
 import Error from "./pages/Error";
 
 // main:
@@ -33,6 +34,16 @@ function App() {
           element={
             <Unauthorized>
               <Dashboard />
+            </Unauthorized>
+          }
+        />
+
+        {/* Mail on "/mail" */}
+        <Route
+          path="mail"
+          element={
+            <Unauthorized>
+              <Mail />
             </Unauthorized>
           }
         />
