@@ -3,16 +3,16 @@ import { useState, useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // contexts:
-import sidebarContext from "../contexts/sidebarContext";
+import sidebarContext from "../../contexts/sidebarContext";
 
 // importing icons:
 import { ChevronRight } from "lucide-react";
 
 // import animation variations:
-import { FadeInOut } from "../animations/sidebar";
+import { FadeInOut } from "../../animations/sidebar";
 
 // types:
-import { SidebarContext } from "../@types/sidebar";
+import { SidebarContext } from "../../@types/sidebar";
 
 // main:
 export const NavItem = ({
@@ -54,14 +54,14 @@ export const NavItem = ({
       {icon}
       {context}
       {isFirst && (
-        <div
+        <span
           style={{
             transform: `translateY(calc(${(activeIndex || 0) * 100}% + ${
               (activeIndex || 0) * 0.25
             }rem))`,
           }}
           className={`_active-overlay absolute bg-[--primary-violet-op55] top-0 left-0 w-full h-full rounded-md -z-10 duration-200`}
-        ></div>
+        />
       )}
     </button>
   );
@@ -158,14 +158,14 @@ export const NavItemExpandable = ({
                 {item}
 
                 {key === 0 && (
-                  <div
+                  <span
                     style={{
                       transform: `translateY(calc(${
                         (activeSubIndex || 0) * 100
                       }% + ${(activeSubIndex || 0) * 0.25}rem))`,
                     }}
                     className={`_active-overlay absolute border-x-[2px] border-[--primary-violet-op77] bg-[--primary-violet-op33] top-0 left-0 w-full h-full rounded-md -z-10 duration-200`}
-                  ></div>
+                  />
                 )}
               </motion.div>
             ))}

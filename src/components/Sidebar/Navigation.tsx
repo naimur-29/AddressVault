@@ -1,5 +1,9 @@
 // importing libraries:
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+// contexts:
+import sidebarContext from "../../contexts/sidebarContext";
 
 // components:
 import { NavItem, NavItemExpandable } from "./NavigationItems";
@@ -7,8 +11,14 @@ import { NavItem, NavItemExpandable } from "./NavigationItems";
 // importing icons:
 import { Tags, Mail, Users2, Star } from "lucide-react";
 
+// types:
+import { SidebarContext } from "../../@types/sidebar";
+
 // main:
 const Navigation = () => {
+  // contexts:
+  const { setIsUntaggedActive } = useContext(sidebarContext) as SidebarContext;
+
   // hooks:
   const navigate = useNavigate();
 
@@ -17,6 +27,7 @@ const Navigation = () => {
       <NavItem
         action={() => {
           navigate("/dashboard");
+          setIsUntaggedActive(false);
         }}
         context={"All People"}
         isFirst
@@ -27,6 +38,7 @@ const Navigation = () => {
       <NavItem
         action={() => {
           navigate("/dashboard");
+          setIsUntaggedActive(false);
         }}
         context={"Favorites"}
         index={1}
@@ -36,6 +48,7 @@ const Navigation = () => {
       <NavItemExpandable
         action={() => {
           navigate("/dashboard");
+          setIsUntaggedActive(false);
         }}
         subAction={() => {}}
         context={"Tags"}
@@ -47,6 +60,7 @@ const Navigation = () => {
       <NavItem
         action={() => {
           navigate("/mail");
+          setIsUntaggedActive(false);
         }}
         context={"Mail"}
         index={3}

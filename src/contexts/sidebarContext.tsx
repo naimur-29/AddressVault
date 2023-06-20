@@ -13,6 +13,7 @@ export const SidebarContextProvider = ({ children }: Props) => {
   // states:
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(false);
   const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [isUntaggedActive, setIsUntaggedActive] = useState(false);
 
   // context value:
   const value: SidebarContext = {
@@ -20,6 +21,8 @@ export const SidebarContextProvider = ({ children }: Props) => {
     setIsSidebarActive,
     activeIndex,
     setActiveIndex,
+    isUntaggedActive,
+    setIsUntaggedActive,
   };
 
   return (

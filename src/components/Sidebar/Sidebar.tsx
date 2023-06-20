@@ -4,16 +4,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 // contexts:
-import sidebarContext from "../contexts/sidebarContext";
+import sidebarContext from "../../contexts/sidebarContext";
 
 // importing icons:
 import { ChevronRight, ArrowLeftFromLine } from "lucide-react";
 
 // import animation variations:
-import { PopInOut, FadeInOut } from "../animations/sidebar";
+import { PopInOut, FadeInOut } from "../../animations/sidebar";
 
 // importing images:
-import AddressVaultLogo from "../assets/imgs/address-vault.png";
+import AddressVaultLogo from "../../assets/imgs/address-vault.png";
 
 // importing local components:
 import Navigation from "./Navigation";
@@ -22,14 +22,20 @@ import Search from "./Search";
 import AddContact from "./AddContact";
 
 // types:
-import { SidebarContext } from "../@types/sidebar";
+import { SidebarContext } from "../../@types/sidebar";
 
 // main:
 const Sidebar = () => {
+  // states:
+
   // contexts:
-  const { isSidebarActive, setIsSidebarActive, setActiveIndex } = useContext(
-    sidebarContext
-  ) as SidebarContext;
+  const {
+    isSidebarActive,
+    setIsSidebarActive,
+    setActiveIndex,
+    isUntaggedActive,
+    setIsUntaggedActive,
+  } = useContext(sidebarContext) as SidebarContext;
 
   // hooks:
   const navigate = useNavigate();
@@ -72,11 +78,17 @@ const Sidebar = () => {
           {/* Stats Section */}
           <button
             onClick={() => {
+              setIsUntaggedActive((prev) => !prev);
               setIsSidebarActive(false);
               setActiveIndex(0);
               navigate("/dashboard");
             }}
-            className="flex items-center justify-between p-2 bg-[--primary-violet-op55] text-[--secondary-text-slate] rounded-md _stats"
+            style={{
+              backgroundColor: isUntaggedActive
+                ? "var(--primary-violet-op77)"
+                : "var(--primary-violet-op33)",
+            }}
+            className="flex items-center justify-between p-2 text-[--secondary-text-slate] rounded-md _stats duration-200"
           >
             <div className="flex flex-col gap-1">
               <p>Untagged</p>
@@ -109,16 +121,36 @@ const Sidebar = () => {
           >
             <motion.div
               variants={FadeInOut}
-              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
-            ></motion.div>
+              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            >
+              <img
+                src={AddressVaultLogo}
+                alt=""
+                className="absolute top-0 left-0 object-cover object-top w-full h-full opacity-50"
+              />
+            </motion.div>
+
             <motion.div
               variants={FadeInOut}
-              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
-            ></motion.div>
+              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            >
+              <img
+                src={AddressVaultLogo}
+                alt=""
+                className="absolute top-0 left-0 object-cover object-center w-full h-full opacity-50"
+              />
+            </motion.div>
+
             <motion.div
               variants={FadeInOut}
-              className="h-4 w-full bg-[--primary-violet] rounded animate-pulse"
-            ></motion.div>
+              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+            >
+              <img
+                src={AddressVaultLogo}
+                alt=""
+                className="absolute top-0 left-0 object-cover object-bottom w-full h-full opacity-50"
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

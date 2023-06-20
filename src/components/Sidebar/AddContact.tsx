@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
 // animations:
-import { FadeInIn } from "../animations/sidebar";
+import { FadeInIn } from "../../animations/sidebar";
 
 const AddContact = () => {
   const [isAddContactModalActive, setIsAddContactModalActive] =
