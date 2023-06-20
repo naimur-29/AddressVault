@@ -1,5 +1,5 @@
 // importing components:
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "./sidebar/Sidebar";
 
 // contexts:
 import { SidebarContextProvider } from "../contexts/sidebarContext";
