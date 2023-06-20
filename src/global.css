@@ -23,6 +23,27 @@ code {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Scrollbar styling */
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: aliceblue;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #2c8781;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #216662;
+}
+
 :root {
   --primary-blue: #1e0478;
   --primary-blue-dark: #0a0129;
@@ -36,5 +57,6 @@ code {
   --primary-sky-blue-op77: #94e7ef77;
 
   --primary-text-slate: #f8fafc;
+  --primary-text-slate-dim: #64748b;
   --secondary-text-slate: #e2e8f0;
 }

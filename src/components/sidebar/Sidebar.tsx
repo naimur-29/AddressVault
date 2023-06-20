@@ -121,34 +121,12 @@ const Sidebar = () => {
           >
             <motion.div
               variants={FadeInOut}
-              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
+              className="h-full w-full bg-[--primary-violet] rounded animate-pulse"
             >
               <img
                 src={AddressVaultLogo}
                 alt=""
-                className="absolute top-0 left-0 object-cover object-top w-full h-full opacity-50"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={FadeInOut}
-              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
-            >
-              <img
-                src={AddressVaultLogo}
-                alt=""
-                className="absolute top-0 left-0 object-cover object-center w-full h-full opacity-50"
-              />
-            </motion.div>
-
-            <motion.div
-              variants={FadeInOut}
-              className="relative h-4 w-full bg-[--primary-violet] rounded animate-pulse"
-            >
-              <img
-                src={AddressVaultLogo}
-                alt=""
-                className="absolute top-0 left-0 object-cover object-bottom w-full h-full opacity-50"
+                className="object-cover object-center w-full h-full opacity-50"
               />
             </motion.div>
           </motion.div>
