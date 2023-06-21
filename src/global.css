@@ -49,6 +49,7 @@ code {
   --primary-blue-dark: #0a0129;
   --primary-blue-light: #6f7ccd;
   --primary-violet: #9b8ccc;
+  --primary-violet-op22: #9b8ccc22;
   --primary-violet-op33: #9b8ccc33;
   --primary-violet-op55: #9b8ccc55;
   --primary-violet-op77: #9b8ccc77;
@@ -57,6 +58,7 @@ code {
   --primary-sky-blue-op77: #94e7ef77;
 
   --primary-text-slate: #f8fafc;
-  --primary-text-slate-dim: #64748b;
   --secondary-text-slate: #e2e8f0;
+  --primary-text-dim: #64748b;
+  --secondary-text-dim: #94a3b8;
 }
