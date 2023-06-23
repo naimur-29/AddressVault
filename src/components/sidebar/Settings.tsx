@@ -1,6 +1,12 @@
 // libraries:
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { auth } from "../../services/firebaseApi";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+
+// contexts:
+import userContext from "../../contexts/userContext";
 
 // importing icons:
 import { Settings as SettingsIcon } from "lucide-react";
@@ -8,10 +14,20 @@ import { Settings as SettingsIcon } from "lucide-react";
 // animations:
 import { FadeInIn } from "../../animations/animations";
 
+// types:
+import { UserContext } from "../../@types/user";
+
+// main:
 const Settings = () => {
   // states:
   const [isSettingsModalActive, setIsSettingsModalActive] =
     useState<boolean>(false);
+
+  // contexts:
+  const { setIsAuthorized } = useContext(userContext) as UserContext;
+
+  // hooks:
+  const navigate = useNavigate();
 
   return (
     <div className="flex items-center justify-between py-1 rounded-md cursor-pointer _user">
@@ -25,7 +41,7 @@ const Settings = () => {
           />
         </div>
         <p className="text-[--primary-text-slate] font-semibold font-mono translate-y-[2px]">
-          User Name
+          {auth.currentUser?.email?.split("@")[0] || "Loading..."}
         </p>
       </div>
 
@@ -63,6 +79,18 @@ const Settings = () => {
                 <label htmlFor="">PhotoUrl</label>
                 <input type="text" name="" id="" />
               </div>
+
+              <button
+                onClick={async () => {
+                  await signOut(auth);
+                  if (!auth.currentUser?.email) {
+                    setIsAuthorized(false);
+                    navigate("/");
+                  }
+                }}
+              >
+                Sign Out
+              </button>
             </motion.div>
           </motion.div>
         )}

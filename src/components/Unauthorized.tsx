@@ -18,16 +18,16 @@ const Unauthorized = ({ children }: Props) => {
   const navigate = useNavigate();
 
   // using contexts:
-  const { isAuthorized } = useContext(userContext) as UserContext;
-
-  console.log(isAuthorized);
+  const { isAuthorized, setIsAuthorized } = useContext(
+    userContext
+  ) as UserContext;
 
   // redirecting back if not authorized:
   useEffect(() => {
     if (!isAuthorized) {
       navigate("/");
     }
-  }, [navigate, isAuthorized]);
+  }, [navigate, isAuthorized, setIsAuthorized]);
 
   return <Layout>{children}</Layout>;
 };

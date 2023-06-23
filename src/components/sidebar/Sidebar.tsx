@@ -120,7 +120,7 @@ const Sidebar = () => {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="_hamburger cursor-pointer fixed bottom-4 right-4 sm:invisible border-2 border-[--primary-violet] w-[70px] rounded p-1 flex flex-col items-center justify-between gap-1"
+            className="_hamburger cursor-pointer fixed bottom-2 right-4 sm:invisible border-2 border-[--primary-violet] w-[70px] rounded p-1 flex flex-col items-center justify-between gap-1"
           >
             <motion.div
               variants={FadeInOut}

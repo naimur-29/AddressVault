@@ -1,5 +1,6 @@
 // importing libraries:
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { auth } from "../services/firebaseApi";
 
 // importing types:
 import { UserContext } from "../@types/user";
@@ -11,6 +12,14 @@ const userContext = createContext<UserContext | null>(null);
 // main:
 export const UserContextProvider = ({ children }: Props) => {
   const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (auth.currentUser?.email) {
+        setIsAuthorized(true);
+      }
+    }, 1000);
+  }, []);
 
   const value: UserContext = {
     isAuthorized,
