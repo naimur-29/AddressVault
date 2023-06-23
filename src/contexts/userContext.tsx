@@ -10,7 +10,7 @@ const userContext = createContext<UserContext | null>(null);
 
 // main:
 export const UserContextProvider = ({ children }: Props) => {
-  const [isAuthorized, setIsAuthorized] = useState<boolean>(true);
+  const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
 
   const value: UserContext = {
     isAuthorized,
