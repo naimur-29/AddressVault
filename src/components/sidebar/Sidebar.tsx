@@ -10,7 +10,7 @@ import sidebarContext from "../../contexts/sidebarContext";
 import { ChevronRight, ArrowLeftFromLine } from "lucide-react";
 
 // import animation variations:
-import { PopInOut, FadeInOut } from "../../animations/sidebar";
+import { PopInOut, FadeInOut } from "../../animations/animations";
 
 // importing images:
 import AddressVaultLogo from "../../assets/imgs/address-vault.png";
@@ -20,6 +20,7 @@ import Navigation from "./Navigation";
 import Settings from "./Settings";
 import Search from "./Search";
 import AddContact from "./AddContact";
+import AnimatedCounter from "../../animations/components/AnimatedCounter";
 
 // types:
 import { SidebarContext } from "../../@types/sidebar";
@@ -92,7 +93,9 @@ const Sidebar = () => {
           >
             <div className="flex flex-col gap-1">
               <p>Untagged</p>
-              <p className="text-left">41</p>
+              <p className="text-left">
+                <AnimatedCounter from={999} to={41} />
+              </p>
             </div>
 
             <ChevronRight />

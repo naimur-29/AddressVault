@@ -9,7 +9,7 @@ import sidebarContext from "../../contexts/sidebarContext";
 import { ChevronRight } from "lucide-react";
 
 // import animation variations:
-import { FadeInOut } from "../../animations/sidebar";
+import { FadeInOut } from "../../animations/animations";
 
 // types:
 import { SidebarContext } from "../../@types/sidebar";

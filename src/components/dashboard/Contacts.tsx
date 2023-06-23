@@ -1,5 +1,6 @@
 // components:
 import ContactItem from "./ContactItem";
+import AnimatedCounter from "../../animations/components/AnimatedCounter";
 
 // main:
 const Contacts = () => {
@@ -8,14 +9,14 @@ const Contacts = () => {
       {/* HEADER */}
       <div className="flex flex-col mb-3">
         <p className="text-sm text-[--primary-text-dim] font-semibold">
-          {332} TOTAL
+          <AnimatedCounter from={999} to={97} /> TOTAL
         </p>
         <h3 className="text-2xl font-semibold text-[--primary-text-slate]">
           Contacts
         </h3>
       </div>
 
-      <div className="flex w-full items-center mb-3 _menu gap-1">
+      <div className="flex items-center w-full gap-1 mb-3 _menu">
         <div className="h-full flex items-center bg-[--primary-violet-op55] py-1 px-3 rounded text-[--secondary-text-slate] font-semibold">
           Favorites
         </div>
@@ -26,12 +27,12 @@ const Contacts = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="_main h-full max-h-full overflow-y-scroll pb-6">
-        <div className="_pinned mb-5">
+      <div className="h-full max-h-full pb-6 overflow-y-scroll _main">
+        <div className="mb-5 _pinned">
           <p className="text-sm text-[--primary-text-dim] mb-3 font-semibold">
             PINNED
           </p>
-          <div className="_contact-item-container flex flex-col gap-3 cursor-pointer">
+          <div className="flex flex-col gap-3 cursor-pointer _contact-item-container">
             <ContactItem
               imgLink="https://w0.peakpx.com/wallpaper/368/441/HD-wallpaper-cute-anime-girl-anime-cat-girl-anime-girl-cartoon-cat-girl-cute-anime-thumbnail.jpg"
               name="Person Name"
@@ -56,7 +57,7 @@ const Contacts = () => {
           <p className="text-sm text-[--primary-text-dim] mb-3 font-semibold">
             A
           </p>
-          <div className="_contact-item-container flex flex-col gap-3 cursor-pointer">
+          <div className="flex flex-col gap-3 cursor-pointer _contact-item-container">
             <ContactItem
               imgLink="https://w0.peakpx.com/wallpaper/368/441/HD-wallpaper-cute-anime-girl-anime-cat-girl-anime-girl-cartoon-cat-girl-cute-anime-thumbnail.jpg"
               name="Person Name"
