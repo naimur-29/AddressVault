@@ -47,6 +47,7 @@ code {
 :root {
   --primary-blue: #1e0478;
   --primary-blue-dark: #0a0129;
+  --primary-blue-dark-op99: #0a012999;
   --primary-blue-light: #6f7ccd;
   --primary-violet: #9b8ccc;
   --primary-violet-op22: #9b8ccc22;

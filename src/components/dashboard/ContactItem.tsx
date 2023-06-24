@@ -7,7 +7,7 @@ import { ContactItemType } from "../../@types/contact";
 // main:
 const ContactItem = ({ imgLink, name, contact }: ContactItemType) => {
   return (
-    <div className="flex items-center justify-between rounded p-2 cursor-pointer bg-[--primary-violet-op22] hover:bg-[--primary-violet-op33] duration-200 shadow-lg hover:shadow-none border-b border-[--primary-violet-op55]">
+    <div className="flex items-center justify-between rounded p-2 cursor-pointer bg-[--primary-violet-op22] hover:bg-[--primary-violet-op33] duration-200 shadow-lg hover:shadow-none">
       <div className="flex items-center gap-2 _left">
         <div className="_img-container w-12 h-12 overflow-hidden rounded-[50%] bg-[--primary-violet-op55]">
           {imgLink ? (
