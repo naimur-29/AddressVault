@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // animations:
-import { DropDown, FadeInIn } from "../../animations/animations";
+import { FadeInIn } from "../../animations/animations";
 
 const ContactMenu = () => {
   const [isContactMenuActive, setIsContactMenuActive] =
@@ -30,7 +30,7 @@ const ContactMenu = () => {
             className="_wrapper fixed top-0 right-0 w-full sm:w-[calc(100vw-270px)] h-full bg-[--primary-violet-op33] sm:backdrop-blur-sm flex items-center justify-center px-5 z-50"
           >
             <motion.div
-              variants={DropDown}
+              variants={FadeInIn}
               className="_modal w-full md:w-[540px] min-h-[50%] bg-white rounded text-black"
             >
               <button onClick={() => setIsContactMenuActive(false)}>

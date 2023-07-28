@@ -12,6 +12,7 @@ import userContext from "../contexts/userContext";
 
 // assets:
 import AddressVaultLogo from "../assets/imgs/address-vault.png";
+import BackgroundImage from "../assets/imgs/landing-bg.webp";
 
 // icons:
 import { Mail, Lock } from "lucide-react";
@@ -51,9 +52,7 @@ const LandingPage = () => {
       {/* BACKGROUND OVERLAY */}
       <div
         style={{
-          backgroundImage:
-            "url('https://wallpaperaccess.com/full/2009854.jpg')",
-          // "url('https://wallpaperaccess.com/full/1084431.png')",
+          backgroundImage: `url('${BackgroundImage}')`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -62,7 +61,7 @@ const LandingPage = () => {
       ></div>
 
       <div className="w-[720px] min-h-[90vh] sm:min-h-[70vh] p-[20px] flex flex-col items-center rounded bg-[--primary-blue-dark-op99] text-[--primary-text-slate] shadow-2xl border-[4px] border-[--primary-violet-light] border-dashed">
-        <div className="flex items-center justify-start w-full gap-2 bg-[--primary-violet-op22] p-2 mb-12 rounded z-10">
+        <div className="flex items-center justify-start w-full gap-2 bg-[--primary-violet-op33] p-2 mb-12 rounded z-10">
           <img
             src={AddressVaultLogo}
             alt="address vault logo"

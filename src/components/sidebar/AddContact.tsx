@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus } from "lucide-react";
 
 // animations:
-import { FadeInIn } from "../../animations/animations";
+import { FadeInIn, DropDown } from "../../animations/animations";
 
 const AddContact = () => {
   const [isAddContactModalActive, setIsAddContactModalActive] =
@@ -31,7 +31,7 @@ const AddContact = () => {
             className="_wrapper fixed top-0 right-0 w-full sm:w-[calc(100vw-270px)] h-full bg-[--primary-violet-op33] sm:backdrop-blur-sm flex items-center justify-center px-5 z-50"
           >
             <motion.div
-              variants={FadeInIn}
+              variants={DropDown}
               className="_modal w-full md:w-[540px] min-h-[50%] bg-white rounded"
             >
               <button onClick={() => setIsAddContactModalActive(false)}>
