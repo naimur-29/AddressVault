@@ -1,11 +1,13 @@
 // libraries:
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { auth, googleProvider } from "../services/firebaseApi";
-import { signInWithPopup } from "firebase/auth";
+import { motion, AnimatePresence } from "framer-motion";
 
 // components:
 import Loading from "../components/Loading";
+import SignIn from "../components/auth/SignIn";
+import CreateAccount from "../components/auth/CreateAccount";
+import SignInWithGoogle from "../components/auth/SignInWithGoogle";
 
 // contexts:
 import userContext from "../contexts/userContext";
@@ -14,8 +16,8 @@ import userContext from "../contexts/userContext";
 import AddressVaultLogo from "../assets/imgs/address-vault.png";
 import BackgroundImage from "../assets/imgs/landing-bg.webp";
 
-// icons:
-import { Mail, Lock } from "lucide-react";
+// animations:
+import { FadeInIn } from "../animations/animations";
 
 // types:
 import { UserContext } from "../@types/user";
@@ -24,14 +26,14 @@ import { UserContext } from "../@types/user";
 const LandingPage = () => {
   // states:
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isNewUser, setIsNewUser] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   // using hooks:
   const navigate = useNavigate();
 
   // contexts:
-  const { isAuthorized, setIsAuthorized } = useContext(
-    userContext
-  ) as UserContext;
+  const { isAuthorized } = useContext(userContext) as UserContext;
 
   useEffect(() => {
     setTimeout(() => {
@@ -60,7 +62,12 @@ const LandingPage = () => {
         className="absolute top-0 left-0 w-full h-full -z-10 bg-[--primary-blue-dark]"
       ></div>
 
-      <div className="w-[720px] min-h-[90vh] sm:min-h-[70vh] p-[20px] flex flex-col items-center rounded bg-[--primary-blue-dark-op99] text-[--primary-text-slate] shadow-2xl border-[4px] border-[--primary-violet-light] border-dashed">
+      <motion.div
+        variants={FadeInIn}
+        initial="hidden"
+        animate="visible"
+        className="w-[720px] min-h-[90vh] sm:min-h-[70vh] p-[20px] flex flex-col items-center rounded bg-[--primary-blue-dark-op99] text-[--primary-text-slate] shadow-2xl border-[4px] border-[--primary-violet-light] border-dashed"
+      >
         <div className="flex items-center justify-start w-full gap-2 bg-[--primary-violet-op33] p-2 mb-12 rounded z-10">
           <img
             src={AddressVaultLogo}
@@ -72,56 +79,48 @@ const LandingPage = () => {
           </span>
         </div>
 
-        <div className="flex-[1] flex flex-col items-center w-full lg:w-2/3 gap-3 _signIn z-10">
-          <h3 className="mb-2 text-3xl font-semibold uppercase">Sign In</h3>
+        <div className="flex flex-col items-center flex-grow w-full gap-4 mb-4 lg:w-2/3">
+          <AnimatePresence>
+            {isNewUser ? (
+              <CreateAccount
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+              />
+            ) : (
+              <SignIn
+                errorMessage={errorMessage}
+                setErrorMessage={setErrorMessage}
+              />
+            )}
+          </AnimatePresence>
 
-          <div className="flex flex-col w-full gap-1 rounded-lg">
-            <label
-              htmlFor="email"
-              className="flex items-center gap-1 py-1 text-lg"
-            >
-              <Mail /> Email
-            </label>
-            <input
-              style={{
-                outline: "2px solid var(--primary-violet)",
-              }}
-              type="email"
-              className="p-3 bg-[--primary-violet-op33] focus:bg-[--primary-violet-op55] rounded-br-xl text-lg shadow-2xl"
-            />
-          </div>
-
-          <div className="flex flex-col w-full gap-1 rounded-lg">
-            <label
-              htmlFor="password"
-              className="flex items-center gap-1 py-1 text-lg"
-            >
-              <Lock /> Password
-            </label>
-            <input
-              style={{
-                outline: "2px solid var(--primary-violet)",
-              }}
-              type="password"
-              className="p-3 bg-[--primary-violet-op33] focus:bg-[--primary-violet-op55] rounded-br-xl text-lg"
-            />
+          <div className="flex justify-start w-full mx-1">
+            {isNewUser ? (
+              <h2>
+                Already have an account?{" "}
+                <button
+                  onClick={() => setIsNewUser(false)}
+                  className="text-blue-400 hover:underline"
+                >
+                  Sign In
+                </button>
+              </h2>
+            ) : (
+              <h2>
+                New here?{" "}
+                <button
+                  onClick={() => setIsNewUser(true)}
+                  className="text-blue-400 hover:underline"
+                >
+                  Create an account
+                </button>
+              </h2>
+            )}
           </div>
         </div>
 
-        <h3 className="z-10">-OR-</h3>
-
-        <button
-          onClick={async () => {
-            await signInWithPopup(auth, googleProvider);
-            if (auth.currentUser?.email) {
-              setIsAuthorized(true);
-            }
-          }}
-          className="z-10 px-8 py-2 border"
-        >
-          Google Sign In
-        </button>
-      </div>
+        <SignInWithGoogle />
+      </motion.div>
     </section>
   );
 };
