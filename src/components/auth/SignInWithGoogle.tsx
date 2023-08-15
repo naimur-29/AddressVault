@@ -21,26 +21,31 @@ const SignInWithGoogle = () => {
   // use hooks:
   const { createNewUser } = useCreateNewUser();
 
+  const handleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+
+      // create new user on db record:
+      if (auth.currentUser?.email) {
+        createNewUser({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.email,
+          photoUrl: auth?.currentUser?.photoURL || "",
+        });
+
+        setIsAuthorized(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center gap-2">
       <h3 className="z-10">-OR-</h3>
 
       <button
-        onClick={async () => {
-          try {
-            await signInWithPopup(auth, googleProvider);
-            if (auth.currentUser?.email) {
-              createNewUser({
-                uid: auth?.currentUser?.uid,
-                username: auth?.currentUser?.email,
-                photoUrl: auth?.currentUser?.photoURL || "",
-              });
-              setIsAuthorized(true);
-            }
-          } catch (error) {
-            console.log(error);
-          }
-        }}
+        onClick={handleSignIn}
         className="z-10 flex items-center justify-center gap-1 px-8 py-2 rounded bg-[#fff3] font-semibold hover:bg-[#fff5]"
       >
         <FcGoogle size={22} />

@@ -1,15 +1,83 @@
+import { useState, useContext, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../services/firebaseApi";
+
+// contexts:
+import userContext from "../../contexts/userContext";
+
+// hooks:
+import useCreateNewUser from "../../hooks/useCreateNewUser";
 
 // animations:
 import { FadeInIn } from "../../animations/animations";
 
 // icons:
-import { Mail, Lock } from "lucide-react";
+import { Mail, Lock, Forward, Loader } from "lucide-react";
 
 // types:
 import { SignInProps } from "../../@types/auth";
+import { UserContext } from "../../@types/user";
 
 const CreateAccount = ({ errorMessage, setErrorMessage }: SignInProps) => {
+  // states:
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // use context:
+  const { setIsAuthorized } = useContext(userContext) as UserContext;
+
+  // use hooks:
+  const { createNewUser } = useCreateNewUser();
+
+  const handleSignUp = async () => {
+    if (!email || !password || !confirmPassword) {
+      setErrorMessage("Invalid info!");
+      return;
+    } else if (!email.includes("@") || !email.includes(".")) {
+      setErrorMessage("Invalid email!");
+      return;
+    } else if (password.length < 8) {
+      setErrorMessage("Password must be 8 characters or more!");
+      return;
+    } else if (password !== confirmPassword) {
+      setErrorMessage("Password doesn't match!");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      setErrorMessage("");
+
+      // create new user on db record:
+      if (auth.currentUser?.email) {
+        createNewUser({
+          uid: auth?.currentUser?.uid,
+          username: auth?.currentUser?.email,
+          photoUrl: auth?.currentUser?.photoURL || "",
+        });
+      }
+
+      setIsAuthorized(true);
+    } catch (error) {
+      const msg: string = String(error);
+      setErrorMessage(msg.slice(msg.indexOf("/") + 1, msg.indexOf(")")));
+    }
+    setIsLoading(false);
+  };
+
+  // erase error message after 5sec
+  useEffect(() => {
+    if (errorMessage) {
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    }
+  }, [errorMessage, setErrorMessage]);
+
   return (
     <motion.div
       variants={FadeInIn}
@@ -41,10 +109,12 @@ const CreateAccount = ({ errorMessage, setErrorMessage }: SignInProps) => {
           <Mail /> Email
         </label>
         <input
+          onChange={(e) => setEmail(e.target.value)}
           style={{
             outline: "2px solid var(--primary-violet)",
           }}
           type="email"
+          placeholder="ex: username@gmail.com"
           className="p-3 bg-[--primary-violet-op33] focus:bg-[--primary-violet-op55] rounded-br-xl text-lg shadow-2xl"
         />
       </motion.div>
@@ -60,10 +130,12 @@ const CreateAccount = ({ errorMessage, setErrorMessage }: SignInProps) => {
           <Lock /> Password
         </label>
         <input
+          onChange={(e) => setPassword(e.target.value)}
           style={{
             outline: "2px solid var(--primary-violet)",
           }}
           type="password"
+          placeholder="*8 or more characters"
           className="p-3 bg-[--primary-violet-op33] focus:bg-[--primary-violet-op55] rounded-br-xl text-lg"
         />
       </motion.div>
@@ -79,13 +151,33 @@ const CreateAccount = ({ errorMessage, setErrorMessage }: SignInProps) => {
           <Lock /> Confirm Password
         </label>
         <input
+          onChange={(e) => setConfirmPassword(e.target.value)}
           style={{
             outline: "2px solid var(--primary-violet)",
           }}
           type="password"
+          placeholder="*8 or more characters"
           className="p-3 bg-[--primary-violet-op33] focus:bg-[--primary-violet-op55] rounded-br-xl text-lg"
         />
       </motion.div>
+
+      <motion.button
+        onClick={handleSignUp}
+        variants={FadeInIn}
+        className="p-3 mt-1 bg-[--primary-violet-op33] hover:bg-[--primary-violet-op77] duration-300 rounded text-lg w-full font-semibold uppercase flex items-center justify-center gap-1"
+      >
+        {isLoading ? (
+          <>
+            Loading
+            <Loader className="text-white animate-spin" />
+          </>
+        ) : (
+          <>
+            Proceed
+            <Forward />
+          </>
+        )}
+      </motion.button>
     </motion.div>
   );
 };
