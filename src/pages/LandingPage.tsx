@@ -99,7 +99,10 @@ const LandingPage = () => {
               <h2>
                 Already have an account?{" "}
                 <button
-                  onClick={() => setIsNewUser(false)}
+                  onClick={() => {
+                    setIsNewUser(false);
+                    setErrorMessage("");
+                  }}
                   className="text-blue-400 hover:underline"
                 >
                   Sign In
@@ -109,7 +112,10 @@ const LandingPage = () => {
               <h2>
                 New here?{" "}
                 <button
-                  onClick={() => setIsNewUser(true)}
+                  onClick={() => {
+                    setIsNewUser(true);
+                    setErrorMessage("");
+                  }}
                   className="text-blue-400 hover:underline"
                 >
                   Create an account

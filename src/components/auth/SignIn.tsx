@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebaseApi";
@@ -21,6 +21,9 @@ const SignIn = ({ errorMessage, setErrorMessage }: SignInProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // references:
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // use context:
   const { setIsAuthorized } = useContext(userContext) as UserContext;
@@ -49,8 +52,12 @@ const SignIn = ({ errorMessage, setErrorMessage }: SignInProps) => {
   // erase error message after 5sec
   useEffect(() => {
     if (errorMessage) {
-      setTimeout(() => {
+      if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
+
+      timeoutRef.current = setTimeout(() => {
         setErrorMessage("");
+
+        if (timeoutRef.current !== null) clearTimeout(timeoutRef.current);
       }, 5000);
     }
   }, [errorMessage, setErrorMessage]);
