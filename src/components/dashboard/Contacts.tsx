@@ -27,7 +27,7 @@ const Contacts = () => {
       </div>
 
       {/* MAIN CONTENT */}
-      <div className="h-full max-h-full pb-6 overflow-y-scroll _main">
+      <div className="h-full max-h-full pb-4 overflow-y-scroll _main">
         <div className="mb-5 _pinned">
           <p className="text-sm text-[--primary-text-dim] mb-3 font-semibold">
             PINNED

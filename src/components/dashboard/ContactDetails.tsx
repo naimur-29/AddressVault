@@ -30,40 +30,38 @@ const ContactDetails = () => {
   const [isSelectTagOpen, setIsSelectTagOpen] = useState<boolean>(false);
 
   return (
-    <section className="h-[50vh] lg:h-full lg:flex-[1] w-full duration-150">
+    <section className="lg:h-full lg:flex-[1] w-full duration-150">
       <div className="_wrapper flex flex-col w-full h-full bg-[--primary-violet-op33] rounded">
         <div
-          className="relative flex items-center justify-center gap-[20px] py-10 _top-container bg-[--primary-blue-dark] rounded-t"
+          className="relative flex flex-col xl:flex-row items-center justify-center gap-[20px] py-12 _top-container bg-[--primary-blue-dark] rounded-t"
           style={{
             background:
               "radial-gradient(farthest-corner at 20% 0%, #fff3 0%, rgba(10,1,41,1) 65%)",
           }}
         >
           {/* go to mail */}
-          <div className="_mail absolute top-0 right-0 m-4 p-2 rounded bg-[#fff3] cursor-pointer hover:bg-[#fff5]">
+          <div className="_mail absolute top-0 right-0 m-2 p-2 rounded bg-[#fff3] cursor-pointer hover:bg-[#fff5]">
             <Mail />
           </div>
 
-          <div className="_left flex-[1] overflow-hidden flex items-center justify-end">
+          <div className="_left flex-[1] flex items-center justify-center xl:justify-end">
             <img
-              className="object-cover object-center w-2/3 border-2 rounded-full aspect-square border-[#fff3]"
+              className="object-cover object-center w-1/2 xl:w-2/3 border-2 rounded-full aspect-square border-[#fff3]"
               src={dummyData.photoURL}
               alt="profile"
             />
           </div>
 
-          <div className="_right flex-[1]">
-            <p className="text-3xl text-[--primary-text-slate] font-bold _name">
+          <div className="_right flex-[1] flex flex-col items-center justify-center xl:items-start w-full px-2 xl:px-0">
+            <p className="text-3xl text-[--primary-text-slate] font-bold mb-4 _name">
               {dummyData.name}
             </p>
-            <p className="_relation text-[--secondary-text-slate] mb-4">
-              {dummyData.relation}
-            </p>
-            <div className="relative flex flex-wrap items-center gap-2 mr-4 _tags-container">
+
+            <div className="relative flex flex-wrap items-center justify-center w-full gap-2 xl:justify-start xl:mr-4 _tags-container">
               {isSelectTagOpen ? (
                 <div
                   style={{ backdropFilter: "blur(5px)" }}
-                  className="absolute top-[44px] left-0 w-[90%] flex flex-col bg-[--primary-blue-light-op99] z-[30] p-[10px] gap-1 _select-tags rounded-lg cursor-pointer"
+                  className="absolute top-[44px] left-[5%] xl:left-0 w-[90%] flex flex-col bg-[--primary-blue-light-op99] z-[30] p-[10px] gap-1 _select-tags rounded-lg cursor-pointer"
                 >
                   {TAGS.map((tag) => (
                     <button
@@ -120,28 +118,23 @@ const ContactDetails = () => {
 
         <div className="_bottom-container flex flex-col gap-[12px] w-full h-full py-[30px] px-[20px]">
           <div className="_info w-full px-4 py-5 flex items-center gap-1 bg-[--primary-blue-dark] rounded-lg text-lg font-semibold">
-            <Mail className="w-[40px]" />
-            <p className="flex-grow">{dummyData.email}</p>
+            <Mail className="flex-[1]" />
+            <p className="flex-[9]">{dummyData.email}</p>
           </div>
 
           <div className="_info w-full px-4 py-5 flex items-center gap-1 bg-[--primary-blue-dark] rounded-lg text-lg font-semibold">
-            <Phone className="w-[40px]" />
-            <p className="flex-grow">{dummyData.phone}</p>
+            <Phone className="flex-[1]" />
+            <p className="flex-[9]">{dummyData.phone}</p>
           </div>
 
           <div className="_info w-full px-4 py-5 flex items-center gap-1 bg-[--primary-blue-dark] rounded-lg text-lg font-semibold">
-            <Home className="w-[40px]" />
-            <p className="flex-grow">{dummyData.address}</p>
+            <Heart className="flex-[1]" />
+            <p className="flex-[9]">{dummyData.relation}</p>
           </div>
 
           <div className="_info w-full px-4 py-5 flex items-center gap-1 bg-[--primary-blue-dark] rounded-lg text-lg font-semibold">
-            <Heart className="w-[40px]" />
-            <p className="flex-grow">{dummyData.relation}</p>
-          </div>
-
-          <div className="_info w-full px-4 py-5 flex items-center gap-1 bg-[--primary-blue-dark] rounded-lg text-lg font-semibold">
-            <PenLine className="w-[40px]" />
-            <p className="flex-grow">{dummyData.createdAt}</p>
+            <Home className="flex-[1]" />
+            <p className="flex-[9]">{dummyData.address}</p>
           </div>
         </div>
       </div>
