@@ -1,14 +1,19 @@
 // importing libraries:
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // animations:
 import { FadeInIn } from "../../animations/animations";
 
-const ContactMenu = () => {
-  const [isContactMenuActive, setIsContactMenuActive] =
-    useState<boolean>(false);
+// types:
+type TContactMenuPropType = {
+  isContactMenuActive: boolean;
+  setIsContactMenuActive: Function;
+};
 
+const ContactMenu = ({
+  isContactMenuActive,
+  setIsContactMenuActive,
+}: TContactMenuPropType) => {
   return (
     <>
       <div

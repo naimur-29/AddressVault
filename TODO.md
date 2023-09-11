@@ -1,3 +1,7 @@
-### 09/10/2023
+### 10/09/2023
 
-- design the <ContactDetails />
+- design the <ContactDetails /> -> 25% ✅
+
+### 11/09/2023
+
+- design the <ContactDetails /> ✅
